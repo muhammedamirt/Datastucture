@@ -141,28 +141,28 @@ class Graph {
     dfs(startVertex) {
         const visited = {}
         const result = []
-        const dfsTraverse = (vertex) => {
+        const traverse = (vertex) => {
             if (!vertex) return null;
             visited[vertex] = true
             result.push(vertex)
             for (const neighbor of this.vertices[vertex]) {
                 if (!visited[neighbor]) {
-                    return dfsTraverse(neighbor)
+                    traverse(neighbor)
                 }
             }
         }
-        dfsTraverse(startVertex)
+        traverse(startVertex)
         console.log(result);
     }
-    bfs(startVertex){
+    bfs(startVertex) {
         const queue = [startVertex]
         const visited = {}
         const result = []
         visited[startVertex] = true
-        while(queue.length){
+        while (queue.length) {
             const vertex = queue.shift()
             result.push(vertex)
-            for(const neighbor of this.vertices[vertex]){
+            for (const neighbor of this.vertices[vertex]) {
                 if (!visited[neighbor]) {
                     visited[neighbor] = true
                     queue.push(neighbor)
@@ -170,6 +170,19 @@ class Graph {
             }
         }
         console.log(result);
+    }
+    findValue(value) {
+        const visited = new Set()
+        function traverse(v) {
+            if (visited.has(v)) {
+                return true
+            }
+            visited.add(v)
+            for (let neighbor of this.vertices[v]) {
+                traverse(neighbor)
+            }
+        }
+        traverse(value)
     }
 }
 
@@ -186,5 +199,6 @@ graph.addEdges("C", "E");
 graph.addEdges("D", "E");
 
 graph.dfs('A')
-
 graph.bfs('A')
+
+console.log(graph.findValue("E"));
