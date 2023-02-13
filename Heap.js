@@ -30,9 +30,7 @@ class Heap {
             } else {
                 return
             }
-
         }
-        // this.shiftUp(endIndex)
     }
     shiftUp(currentIndex) {
         let parentIndex = this.parent(currentIndex)
@@ -56,7 +54,7 @@ class Heap {
     }
     insert(num) {
         this.heap[this.heap.length] = num
-        this.shiftUp(this.heap.length - 1)
+        this.shiftUp(this.heap.length)
     }
     parent(i) {
         return parseInt((i - 1) / 2)
@@ -80,8 +78,6 @@ class Heap {
 }
 const array = [3, 4, 2, 5, 6, 7, 8, 9]
 const heap = new Heap(array);
-// heap.insert(1)
-// heap.insert(5)
 heap.insert(15)
 // heap.display()
 // heap.peak()
