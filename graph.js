@@ -154,20 +154,37 @@ class Graph {
         dfsTraverse(startVertex)
         console.log(result);
     }
+    bfs(startVertex){
+        const queue = [startVertex]
+        const visited = {}
+        const result = []
+        visited[startVertex] = true
+        while(queue.length){
+            const vertex = queue.shift()
+            result.push(vertex)
+            for(const neighbor of this.vertices[vertex]){
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true
+                    queue.push(neighbor)
+                }
+            }
+        }
+        console.log(result);
+    }
 }
 
+const graph = new Graph();
+graph.addVertex("A");
+graph.addVertex("B");
+graph.addVertex("C");
+graph.addVertex("D");
+graph.addVertex("E");
+graph.addEdges("A", "B");
+graph.addEdges("A", "C");
+graph.addEdges("B", "D");
+graph.addEdges("C", "E");
+graph.addEdges("D", "E");
 
-const graph = new Graph()
+graph.dfs('A')
 
-graph.addVertex(2)
-graph.addVertex(6)
-graph.addVertex(7)
-graph.addVertex(4)
-
-graph.addEdges(2, 5)
-graph.addEdges(3, 4)
-graph.addEdges(6, 5)
-graph.addEdges(4, 5)
-
-graph.dfs(3)
-
+graph.bfs('A')
